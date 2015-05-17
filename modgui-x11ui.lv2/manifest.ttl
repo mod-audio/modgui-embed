@@ -1,0 +1,338 @@
+@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+
+<http://portalmod.com/ns/modgui#X11UI>
+    a <http://lv2plug.in/ns/extensions/ui#X11UI> ;
+    ui:binary <modgui-x11.so> ;
+    lv2:extensionData <http://lv2plug.in/ns/extensions/ui#idleInterface> ,
+                      <http://lv2plug.in/ns/extensions/ui#showInterface> ;
+    lv2:optionalFeature <http://lv2plug.in/ns/extensions/ui#fixedSize> ,
+                        <http://lv2plug.in/ns/extensions/ui#noUserResize> ,
+                        <http://lv2plug.in/ns/extensions/ui#resize> ;
+    rdfs:seeAlso <modguis.ttl> .
+
+# caps
+<http://portalmod.com/plugins/caps/AmpVTS>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/AutoFilter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/CEO>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/CabinetIV>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/ChorusI>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Click>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Compress>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/CompressX2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Eq10>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Eq10X2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Eq4p>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Fractal>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Narrower>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Noisegate>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/PhaserII>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Plate>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/PlateX2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Saturate>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Scape>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Sin>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Spice>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/SpiceX2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/ToneStack>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/White>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/caps/Wider>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+# fomp
+<http://drobilla.net/plugins/blop/sawtooth>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/blop/square>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/blop/triangle>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/fomp/autowah>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/fomp/cs_phaser1>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/fomp/saw_vco>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+# mda
+<http://portalmod.com/plugins/mda/Ambience>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Combo>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/DX10>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/DeEss>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Delay>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Detune>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/EPiano>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/JX10>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Limiter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Overdrive>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Piano>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/RePsycho>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/RezFilter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/RingMod>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/RoundPan>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Shepard>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Stereo>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/SubSynth>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/TalkBox>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/ThruZero>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Tracker>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/VocInput>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mda/Vocoder>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+# sooperlooper
+<http://portalmod.com/plugins/sooperlooper>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+# mod-devel
+<http://portalmod.com/plugins/mod-devel/2Voices>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/BandPassFilter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/BigMuffPi>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/Capo>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/CrossOver2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/CrossOver3>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/DS1>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/Drop>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/Gain>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/Gain2x2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/Harmonizer>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/Harmonizer2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/HarmonizerCS>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/HighPassFilter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/LowPassFilter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/SuperCapo>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/SuperWhammy>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/SwitchBox2>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/SwitchBox3>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/SwitchTrigger4>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/mod-devel/ToggleSwitch4>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+# swh-plugins
+<http://plugin.org.uk/swh-plugins/analogueOsc>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/autoPhaser>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/decimator>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/delayorama>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/fourByFourPole>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/harmonicGen>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/lfoPhaser>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/revdelay>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/shaper>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/tapeDelay>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://plugin.org.uk/swh-plugins/vynil>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+# taps
+<http://portalmod.com/plugins/tap/autopan>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/chorusflanger>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/deesser>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/doubler>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/dynamics_m>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/dynamics_st>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/echo>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/eq>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/eqbw>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/limiter>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/pinknoise>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/pitch>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/reflector>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/reverb>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/rotspeak>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/sigmoid>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/tremolo>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/tubewarmth>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
+
+<http://portalmod.com/plugins/tap/vibrato>
+    ui:ui <http://portalmod.com/ns/modgui#X11UI> .
