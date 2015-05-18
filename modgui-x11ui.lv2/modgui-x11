@@ -22,8 +22,8 @@
 import json
 
 from PyQt4.QtCore import pyqtSignal, pyqtSlot, Qt, QPoint, QThread, QSize, QUrl
-from PyQt4.QtGui import QImage, QPainter
-from PyQt4.QtGui import QApplication, QVBoxLayout, QX11EmbedWidget
+from PyQt4.QtGui import QColor, QImage, QPainter
+from PyQt4.QtGui import QApplication, QPalette, QVBoxLayout, QX11EmbedWidget
 from PyQt4.QtWebKit import QWebElement, QWebSettings, QWebView
 
 # ------------------------------------------------------------------------------------------------------------
@@ -274,6 +274,7 @@ class EmbedWindow(QX11EmbedWidget):
 
     def __init__(self, winId):
         QX11EmbedWidget.__init__(self)
+        self.setContentsMargins(0, 0, 0, 0)
 
         URI = sys.argv[1]
 
@@ -287,6 +288,9 @@ class EmbedWindow(QX11EmbedWidget):
         self.fSizeSetup    = False
         self.fQuitReceived = False
         self.fWasRepainted = False
+
+        # TESTING
+        self.fHostColor = QColor("#3D3D3D")
 
         self.fPlugin      = PluginSerializer(URI)
         self.fPorts       = self.fPlugin.data['ports']
@@ -320,9 +324,9 @@ class EmbedWindow(QX11EmbedWidget):
         self.setLayout(self.fLayout)
 
         self.fWebview = QWebView(self)
-        self.setContentsMargins(0, 0, 0, 0)
+        #self.fWebview.setAttribute(Qt.WA_OpaquePaintEvent, False)
+        #self.fWebview.setAttribute(Qt.WA_TranslucentBackground, True)
         #self.fWebview.settings().setAttribute(7, True)
-
         self.fLayout.addWidget(self.fWebview)
 
         page = self.fWebview.page()
@@ -331,6 +335,11 @@ class EmbedWindow(QX11EmbedWidget):
         mainFrame = page.mainFrame()
         mainFrame.setScrollBarPolicy(Qt.Horizontal, Qt.ScrollBarAlwaysOff)
         mainFrame.setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
+
+        palette = self.fWebview.palette()
+        palette.setBrush(QPalette.Base, self.fHostColor)
+        page.setPalette(palette)
+        self.fWebview.setPalette(palette)
 
         settings = self.fWebview.settings()
         settings.setAttribute(QWebSettings.DeveloperExtrasEnabled, True)
@@ -410,12 +419,13 @@ class EmbedWindow(QX11EmbedWidget):
         #y = -1
         lastx = -1
         lasty = -1
+        bgcol = self.fHostColor.rgba()
 
         for h in range(0, image.height()):
             hasNonTransPixels = False
 
             for w in range(0, image.width()):
-                if image.pixel(w, h) not in (0, 0xff070707):
+                if image.pixel(w, h) not in (0, bgcol): # 0xff070707):
                     hasNonTransPixels = True
                     if x == -1 or x > w:
                         x = w
