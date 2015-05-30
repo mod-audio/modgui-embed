@@ -10,7 +10,7 @@ CXX ?= g++
 # --------------------------------------------------------------
 # Set build and link flags
 
-BASE_FLAGS = -Wall -Wextra -pipe -MD -MP $(shell pkg-config --cflags carla-utils)
+BASE_FLAGS = -Wall -Wextra -pipe -DREAL_BUILD -MD -MP
 BASE_OPTS  = -O2 -mtune=generic -msse -msse2 -fdata-sections -ffunction-sections -fPIC -DPIC
 LINK_OPTS  = -fdata-sections -ffunction-sections -Wl,--gc-sections -Wl,-O1 -Wl,--as-needed -Wl,--strip-all
 
@@ -35,13 +35,14 @@ else
 OBJDIR = $(CURDIR)/build/Release
 endif
 
-OBJS   = $(OBJDIR)/lv2_ui.cpp.o
-TARGET = $(CURDIR)/modgui-x11ui.lv2/modgui-x11.so
+TARGETS = \
+	$(CURDIR)/modgui-x11ui.lv2/modgui-x11.so \
+	$(CURDIR)/modgui-x11ui.lv2/modgui-utils.so
 
 # --------------------------------------------------------------
 # Common
 
-all: $(TARGET)
+all: $(TARGETS)
 
 $(OBJDIR)/%.c.o: src/%.c
 	-@mkdir -p $(OBJDIR)
@@ -51,21 +52,26 @@ $(OBJDIR)/%.c.o: src/%.c
 $(OBJDIR)/%.cpp.o: %.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling $<"
-	$(CXX) $< $(BUILD_CXX_FLAGS) -c -o $@
+	$(CXX) $< $(BUILD_CXX_FLAGS) -Icarla-common -c -o $@
 
 clean:
 	rm -f $(OBJS)
-	rm -f $(TARGET)
+	rm -f $(TARGETS)
 
 # --------------------------------------------------------------
 # Objects
 
-$(CURDIR)/modgui-x11ui.lv2/modgui-x11.so: $(OBJS)
+$(CURDIR)/modgui-x11ui.lv2/modgui-x11.so: $(OBJDIR)/lv2_ui.cpp.o
 	@echo "Linking modgui-x11"
+	$(CXX) $^ $(LINK_FLAGS) -lpthread -shared -o $@
+
+$(CURDIR)/modgui-x11ui.lv2/modgui-utils.so: $(OBJDIR)/lv2_ui-utils.cpp.o
+	@echo "Linking libutils.so"
 	$(CXX) $^ $(LINK_FLAGS) -lpthread -shared -o $@
 
 # --------------------------------------------------------------
 
--include $(OBJS:%.o=%.d)
+-include $(OBJDIR)/lv2_ui.cpp.d
+-include $(OBJDIR)/lv2_ui-utils.cpp.d
 
 # --------------------------------------------------------------

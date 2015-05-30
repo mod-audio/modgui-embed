@@ -1,6 +1,8 @@
 *.a
 *.d
 *.o
+*.pyc
 *.so
 
 build
+__pycache__

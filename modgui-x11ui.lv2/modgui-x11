@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# X11 bridge for LV2 modguis
+# MODGUI X11UI, based on Carla code
 # Copyright (C) 2015 Filipe Coelho <falktx@falktx.com>
 #
 # This program is free software; you can redistribute it and/or
@@ -43,7 +43,7 @@ from signal import signal, SIGINT, SIGTERM
 # ------------------------------------------------------------------------------------------------------------
 # Imports (Carla)
 
-from carla_utils import *
+from modgui_utils import *
 
 # ------------------------------------------------------------------------------------------------------------
 # Imports (Global)
@@ -696,12 +696,6 @@ if __name__ == '__main__':
         print("usage: %s <plugin-uri>" % sys.argv[0])
         sys.exit(1)
 
-    libPath = os.getenv("CARLA_LIBRARY_PATH")
-
-    if libPath is None:
-        print("CARLA_LIBRARY_PATH not set, cannot continue")
-        sys.exit(1)
-
     # -------------------------------------------------------------
     # App initialization
 
@@ -712,8 +706,8 @@ if __name__ == '__main__':
     # -------------------------------------------------------------
     # Init utils
 
-    gCarla.utils = CarlaUtils(os.path.join(libPath, "libcarla_utils.so"))
-    gCarla.utils.set_process_name("carla-bridge-lv2-modgui")
+    gCarla.utils = CarlaUtils(os.path.join(os.path.dirname(sys.argv[0]), "modgui-utils.so"))
+    gCarla.utils.set_process_name("modgui-x11")
 
     # -------------------------------------------------------------
     # Set-up custom signal handling
