@@ -514,7 +514,7 @@ struct CarlaPipeCommon::PrivateData {
         } CARLA_SAFE_EXCEPTION("CreateEvent");
 #endif
 
-        carla_zeroChar(tmpBuf, 0xff+1);
+        carla_zeroChars(tmpBuf, 0xff+1);
     }
 
     ~PrivateData() noexcept
@@ -534,8 +534,7 @@ struct CarlaPipeCommon::PrivateData {
 // -----------------------------------------------------------------------
 
 CarlaPipeCommon::CarlaPipeCommon() noexcept
-    : pData(new PrivateData()),
-      leakDetector_CarlaPipeCommon()
+    : pData(new PrivateData())
 {
     carla_debug("CarlaPipeCommon::CarlaPipeCommon()");
 }
@@ -800,12 +799,12 @@ bool CarlaPipeCommon::writeAndFixMessage(const char* const msg) const noexcept
         if (fixedMsg[size-1] == '\r')
         {
             fixedMsg[size-1] = '\n';
-            fixedMsg[size]   = '\0';
+            fixedMsg[size  ] = '\0';
             fixedMsg[size+1] = '\0';
         }
         else
         {
-            fixedMsg[size]   = '\n';
+            fixedMsg[size  ] = '\n';
             fixedMsg[size+1] = '\0';
         }
     }
@@ -963,7 +962,8 @@ void CarlaPipeCommon::writeLv2AtomMessage(const uint32_t index, const LV2_Atom* 
     char tmpBuf[0xff+1];
     tmpBuf[0xff] = '\0';
 
-    CarlaString base64atom(CarlaString::asBase64(atom, lv2_atom_total_size(atom)));
+    const uint32_t atomTotalSize(lv2_atom_total_size(atom));
+    CarlaString base64atom(CarlaString::asBase64(atom, atomTotalSize));
 
     const CarlaMutexLocker cml(pData->writeLock);
 
@@ -973,7 +973,7 @@ void CarlaPipeCommon::writeLv2AtomMessage(const uint32_t index, const LV2_Atom* 
         std::snprintf(tmpBuf, 0xff, "%i\n", index);
         _writeMsgBuffer(tmpBuf, std::strlen(tmpBuf));
 
-        std::snprintf(tmpBuf, 0xff, "%i\n", atom->size);
+        std::snprintf(tmpBuf, 0xff, "%i\n", atomTotalSize);
         _writeMsgBuffer(tmpBuf, std::strlen(tmpBuf));
 
         writeAndFixMessage(base64atom.buffer());
@@ -1017,7 +1017,7 @@ const char* CarlaPipeCommon::_readline() const noexcept
 
     pData->tmpStr.clear();
 
-    for (int i=0; i < 0xff; ++i)
+    for (int i=0; i<0xff; ++i)
     {
         try {
 #ifdef CARLA_OS_WIN
@@ -1028,40 +1028,37 @@ const char* CarlaPipeCommon::_readline() const noexcept
 #endif
         } CARLA_SAFE_EXCEPTION_BREAK("CarlaPipeCommon::readline() - read");
 
-        if (ret == 1 && c != '\n')
+        if (ret != 1 || c == '\n')
+            break;
+
+        if (c == '\r')
+            c = '\n';
+
+        *ptr++ = c;
+
+        if (i+1 == 0xff)
         {
-            if (c == '\r')
-                c = '\n';
-
-            *ptr++ = c;
-
-            if (i+1 == 0xff)
-            {
-                i = 0;
-                ptr = pData->tmpBuf;
-                pData->tmpStr += pData->tmpBuf;
-            }
-
-            continue;
+            i = 0;
+            *ptr = '\0';
+            pData->tmpStr += pData->tmpBuf;
+            ptr = pData->tmpBuf;
         }
-
-        if (pData->tmpStr.isNotEmpty() || ptr != pData->tmpBuf || ret == 1)
-        {
-            if (ptr != pData->tmpBuf)
-            {
-                *ptr = '\0';
-                pData->tmpStr += pData->tmpBuf;
-            }
-
-            try {
-                return pData->tmpStr.dup();
-            } CARLA_SAFE_EXCEPTION_RETURN("CarlaPipeCommon::readline() - dup", nullptr);
-        }
-
-        break;
     }
 
-    return nullptr;
+    if (ptr != pData->tmpBuf)
+    {
+        *ptr = '\0';
+        pData->tmpStr += pData->tmpBuf;
+    }
+    else if (pData->tmpStr.isEmpty())
+    {
+        // some error
+        return nullptr;
+    }
+
+    try {
+        return pData->tmpStr.dup();
+    } CARLA_SAFE_EXCEPTION_RETURN("CarlaPipeCommon::readline() - dup", nullptr);
 }
 
 const char* CarlaPipeCommon::_readlineblock(const uint32_t timeOutMilliseconds) const noexcept
@@ -1112,8 +1109,7 @@ bool CarlaPipeCommon::_writeMsgBuffer(const char* const msg, const std::size_t s
 // -----------------------------------------------------------------------
 
 CarlaPipeServer::CarlaPipeServer() noexcept
-    : CarlaPipeCommon(),
-      leakDetector_CarlaPipeServer()
+    : CarlaPipeCommon()
 {
     carla_debug("CarlaPipeServer::CarlaPipeServer()");
 }
@@ -1485,8 +1481,7 @@ void CarlaPipeServer::writeHideMessage() const noexcept
 // -----------------------------------------------------------------------
 
 CarlaPipeClient::CarlaPipeClient() noexcept
-    : CarlaPipeCommon(),
-      leakDetector_CarlaPipeClient()
+    : CarlaPipeCommon()
 {
     carla_debug("CarlaPipeClient::CarlaPipeClient()");
 }
