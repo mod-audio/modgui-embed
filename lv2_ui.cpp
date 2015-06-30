@@ -209,7 +209,7 @@ LV2_SYMBOL_EXPORT
 const LV2UI_Descriptor* lv2ui_descriptor(uint32_t index)
 {
     static const LV2UI_Descriptor lv2UiDesc = {
-    /* URI            */ "http://portalmod.com/ns/modgui#X11UI",
+    /* URI            */ "http://moddevices.com/ns/modgui#X11UI",
     /* instantiate    */ lv2ui_instantiate,
     /* cleanup        */ lv2ui_cleanup,
     /* port_event     */ lv2ui_port_event,
