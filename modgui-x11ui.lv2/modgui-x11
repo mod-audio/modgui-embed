@@ -292,7 +292,6 @@ class EmbedWindow(QX11EmbedWidget):
         self.fWebview = QWebView(self)
         #self.fWebview.setAttribute(Qt.WA_OpaquePaintEvent, False)
         #self.fWebview.setAttribute(Qt.WA_TranslucentBackground, True)
-        #self.fWebview.settings().setAttribute(7, True)
         self.fLayout.addWidget(self.fWebview)
 
         page = self.fWebview.page()
