@@ -2,13 +2,23 @@
 @prefix ui:  <http://lv2plug.in/ns/extensions/ui#> .
 
 <http://moddevices.com/ns/modgui#X11UI>
-    a <http://lv2plug.in/ns/extensions/ui#X11UI> ;
+    a ui:X11UI ;
     ui:binary <modgui-x11.so> ;
-    lv2:extensionData <http://lv2plug.in/ns/extensions/ui#idleInterface> ,
-                      <http://lv2plug.in/ns/extensions/ui#showInterface> ;
-    lv2:optionalFeature <http://lv2plug.in/ns/extensions/ui#fixedSize> ,
-                        <http://lv2plug.in/ns/extensions/ui#noUserResize> ,
-                        <http://lv2plug.in/ns/extensions/ui#resize> .
+    lv2:extensionData ui:idleInterface ,
+                      ui:showInterface ;
+    lv2:optionalFeature ui:fixedSize ,
+                        ui:noUserResize ,
+                        ui:resize .
+
+# blop
+<http://drobilla.net/plugins/blop/sawtooth>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/blop/square>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/blop/triangle>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 # caps
 <http://moddevices.com/plugins/caps/AmpVTS>
@@ -87,19 +97,16 @@
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 # fomp
-<http://drobilla.net/plugins/blop/sawtooth>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
-
-<http://drobilla.net/plugins/blop/square>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
-
-<http://drobilla.net/plugins/blop/triangle>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
-
 <http://drobilla.net/plugins/fomp/autowah>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://drobilla.net/plugins/fomp/cs_phaser1>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/fomp/pulse_vco>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://drobilla.net/plugins/fomp/rec_vco>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://drobilla.net/plugins/fomp/saw_vco>
@@ -234,9 +241,6 @@
 <http://moddevices.com/plugins/mod-devel/SwitchBox2>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://moddevices.com/plugins/mod-devel/SwitchBox3>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
-
 <http://moddevices.com/plugins/mod-devel/SwitchTrigger4>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
@@ -247,8 +251,8 @@
 <http://plugin.org.uk/swh-plugins/analogueOsc>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://plugin.org.uk/swh-plugins/autoPhaser>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+# <http://plugin.org.uk/swh-plugins/autoPhaser>
+#     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://plugin.org.uk/swh-plugins/decimator>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
@@ -256,14 +260,14 @@
 <http://plugin.org.uk/swh-plugins/delayorama>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://plugin.org.uk/swh-plugins/fourByFourPole>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+# <http://plugin.org.uk/swh-plugins/fourByFourPole>
+#     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://plugin.org.uk/swh-plugins/harmonicGen>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://plugin.org.uk/swh-plugins/lfoPhaser>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+# <http://plugin.org.uk/swh-plugins/lfoPhaser>
+#     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://plugin.org.uk/swh-plugins/revdelay>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
