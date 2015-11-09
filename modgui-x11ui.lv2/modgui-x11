@@ -29,11 +29,9 @@ from PyQt4.QtWebKit import QWebElement, QWebSettings, QWebView
 # ------------------------------------------------------------------------------------------------------------
 # Imports (tornado)
 
-from pystache import render as pyrender
-from tornado.gen import engine
 from tornado.log import enable_pretty_logging
 from tornado.ioloop import IOLoop
-from tornado.web import asynchronous, HTTPError
+from tornado.web import HTTPError
 from tornado.web import Application, RequestHandler, StaticFileHandler
 
 # ------------------------------------------------------------------------------------------------------------
@@ -87,18 +85,18 @@ os.environ['MOD_DEVICE_WEBSERVER_PORT'] = PORT
 # ------------------------------------------------------------------------------------------------------------
 # Imports (MOD)
 
-from mod.lv2 import get_plugin_info, init as lv2_init
+from mod.utils import get_plugin_info, init as lv2_init
 
 # ------------------------------------------------------------------------------------------------------------
 # Global Carla object
 
-class CarlaObject(object):
+class MOD(object):
     __slots__ = [
         'utils' # Utils object
     ]
 
-gCarla = CarlaObject()
-gCarla.utils = None
+mod = MOD()
+mod.utils = None
 
 # ------------------------------------------------------------------------------------------------------------
 # MOD related classes
@@ -110,22 +108,16 @@ class EffectGet(RequestHandler):
         try:
             data = get_plugin_info(uri)
         except:
+            print("ERROR: get_plugin_info for '%s' failed" % uri)
             raise HTTPError(404)
 
         self.set_header('Content-type', 'application/json')
         self.write(json.dumps(data))
+        self.finish()
 
-class EffectResource(StaticFileHandler):
-
-    def initialize(self):
-        # Overrides StaticFileHandler initialize
-        pass
-
-    def get(self, path):
-        try:
-            uri = self.get_argument('uri')
-        except:
-            return self.shared_resource(path)
+class EffectHTML(RequestHandler):
+    def get(self, html):
+        uri = self.get_argument('uri')
 
         try:
             data = get_plugin_info(uri)
@@ -133,23 +125,16 @@ class EffectResource(StaticFileHandler):
             raise HTTPError(404)
 
         try:
-            root = data['gui']['resourcesDirectory']
+            path = data['gui']['%sTemplate' % html]
         except:
             raise HTTPError(404)
 
-        try:
-            super(EffectResource, self).initialize(root)
-            super(EffectResource, self).get(path)
-        except HTTPError as e:
-            if e.status_code != 404:
-                raise e
-            self.shared_resource(path)
-        except IOError:
+        if not os.path.exists(path):
             raise HTTPError(404)
 
-    def shared_resource(self, path):
-        super(EffectResource, self).initialize(os.path.join(HTML_DIR, 'resources'))
-        super(EffectResource, self).get(path)
+        with open(path, 'rb') as fd:
+            self.set_header('Content-type', 'text/html')
+            self.write(fd.read())
 
 class EffectStylesheet(RequestHandler):
     def get(self):
@@ -193,6 +178,41 @@ class EffectJavascript(RequestHandler):
             self.set_header('Content-type', 'text/javascript')
             self.write(fd.read())
 
+class EffectResource(StaticFileHandler):
+    def initialize(self):
+        # Overrides StaticFileHandler initialize
+        pass
+
+    def get(self, path):
+        try:
+            uri = self.get_argument('uri')
+        except:
+            return self.shared_resource(path)
+
+        try:
+            data = get_plugin_info(uri)
+        except:
+            raise HTTPError(404)
+
+        try:
+            root = data['gui']['resourcesDirectory']
+        except:
+            raise HTTPError(404)
+
+        try:
+            super(EffectResource, self).initialize(root)
+            return super(EffectResource, self).get(path)
+        except HTTPError as e:
+            if e.status_code != 404:
+                raise e
+            return self.shared_resource(path)
+        except IOError:
+            raise HTTPError(404)
+
+    def shared_resource(self, path):
+        super(EffectResource, self).initialize(os.path.join(HTML_DIR, 'resources'))
+        return super(EffectResource, self).get(path)
+
 # ------------------------------------------------------------------------------------------------------------
 # WebServer Thread
 
@@ -206,6 +226,7 @@ class WebServerThread(QThread):
         self.fApplication = Application(
             [
                 (r"/effect/get/?", EffectGet),
+                (r"/effect/(icon|settings).html", EffectHTML),
                 (r"/effect/stylesheet.css", EffectStylesheet),
                 (r"/effect/gui.js", EffectJavascript),
                 (r"/resources/(.*)", EffectResource),
@@ -271,7 +292,7 @@ class EmbedWindow(QX11EmbedWidget):
         # Init pipe
 
         if len(sys.argv) == 7:
-            self.fPipeClient = gCarla.utils.pipe_client_new(lambda s,msg: self.msgCallback(msg))
+            self.fPipeClient = mod.utils.pipe_client_new(lambda s,msg: self.msgCallback(msg))
         else:
             self.fPipeClient = None
 
@@ -346,12 +367,12 @@ class EmbedWindow(QX11EmbedWidget):
         if not self.fQuitReceived:
             self.send(["exiting"])
 
-        gCarla.utils.pipe_client_destroy(self.fPipeClient)
+        mod.utils.pipe_client_destroy(self.fPipeClient)
         self.fPipeClient = None
 
     def idleStuff(self):
         if self.fPipeClient is not None:
-            gCarla.utils.pipe_client_idle(self.fPipeClient)
+            mod.utils.pipe_client_idle(self.fPipeClient)
             self.checkForRepaintChanges()
 
         if self.fSizeSetup:
@@ -412,6 +433,8 @@ class EmbedWindow(QX11EmbedWidget):
             self.setFixedSize(size)
 
         # set initial values
+        self.fCurrentFrame.evaluateJavaScript("icongui.setPortValue(':bypass', 0, null)")
+
         for index in self.fPortValues.keys():
             symbol = self.fPortSymbols[index]
             value  = self.fPortValues[index]
@@ -610,13 +633,13 @@ class EmbedWindow(QX11EmbedWidget):
         if self.fPipeClient is None:
             return ""
 
-        return gCarla.utils.pipe_client_readlineblock(self.fPipeClient, 5000)
+        return mod.utils.pipe_client_readlineblock(self.fPipeClient, 5000)
 
     def send(self, lines):
         if self.fPipeClient is None or len(lines) == 0:
             return
 
-        gCarla.utils.pipe_client_lock(self.fPipeClient)
+        mod.utils.pipe_client_lock(self.fPipeClient)
 
         # this must never fail, we need to unlock at the end
         try:
@@ -635,11 +658,11 @@ class EmbedWindow(QX11EmbedWidget):
                     print("unknown data type to send:", type(line))
                     return
 
-                gCarla.utils.pipe_client_write_msg(self.fPipeClient, line2 + "\n")
+                mod.utils.pipe_client_write_msg(self.fPipeClient, line2 + "\n")
         except:
             pass
 
-        gCarla.utils.pipe_client_flush_and_unlock(self.fPipeClient)
+        mod.utils.pipe_client_flush_and_unlock(self.fPipeClient)
 
 # ------------------------------------------------------------------------------------------------------------
 # Signal handler
@@ -673,8 +696,8 @@ if __name__ == '__main__':
     # -------------------------------------------------------------
     # Init utils
 
-    gCarla.utils = CarlaUtils(os.path.join(os.path.dirname(sys.argv[0]), "modgui-utils.so"))
-    gCarla.utils.set_process_name("modgui-x11")
+    mod.utils = CarlaUtils(os.path.join(os.path.dirname(sys.argv[0]), "modgui-utils.so"))
+    mod.utils.set_process_name("modgui-x11")
 
     # -------------------------------------------------------------
     # Set-up custom signal handling
