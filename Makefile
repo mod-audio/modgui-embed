@@ -55,8 +55,8 @@ $(OBJDIR)/%.cpp.o: %.cpp
 	$(CXX) $< $(BUILD_CXX_FLAGS) -Icarla-common -c -o $@
 
 clean:
-	rm -f $(OBJS)
 	rm -f $(TARGETS)
+	rm -rf build
 
 # --------------------------------------------------------------
 # Objects
