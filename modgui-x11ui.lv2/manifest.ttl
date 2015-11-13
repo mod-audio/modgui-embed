@@ -30,6 +30,9 @@
 <http://moddevices.com/plugins/caps/CEO>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/caps/CabinetIII>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/caps/CabinetIV>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
@@ -52,6 +55,9 @@
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/caps/Eq4p>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/caps/EqFA4p>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/caps/Fractal>
@@ -281,7 +287,7 @@
 <http://plugin.org.uk/swh-plugins/vynil>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-# taps
+# tap
 <http://moddevices.com/plugins/tap/autopan>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
@@ -294,10 +300,10 @@
 <http://moddevices.com/plugins/tap/doubler>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://moddevices.com/plugins/tap/dynamics_m>
+<http://moddevices.com/plugins/tap/dynamics>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://moddevices.com/plugins/tap/dynamics_st>
+<http://moddevices.com/plugins/tap/dynamics-st>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/tap/echo>
