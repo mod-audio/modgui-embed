@@ -85,13 +85,13 @@ T carla_maxNegative(const T& v1, const T& v2) noexcept
 }
 
 /*
- * Fix bounds of 'value' between 'min' and 'max'.
+ * Return a value between 'min' and 'max'.
  */
 template<typename T>
 static inline
 const T& carla_fixedValue(const T& min, const T& max, const T& value) noexcept
 {
-    CARLA_SAFE_ASSERT_RETURN(max > min, max);
+    CARLA_SAFE_ASSERT_RETURN(max > min, min);
 
     if (value <= min)
         return min;
@@ -203,7 +203,7 @@ void carla_zeroFloats(float floats[], const std::size_t count) noexcept
 // --------------------------------------------------------------------------------------------------------------------
 // Missing functions in OSX.
 
-#if defined(CARLA_OS_MAC) && ! defined(DISTRHO_OS_MAC)
+#if 0 // defined(CARLA_OS_MAC) && ! defined(DISTRHO_OS_MAC)
 namespace std {
 inline float fmin(float __x, float __y)
   { return __builtin_fminf(__x, __y); }
