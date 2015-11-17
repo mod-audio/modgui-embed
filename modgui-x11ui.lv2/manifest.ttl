@@ -122,6 +122,12 @@
 <http://moddevices.com/plugins/mda/Ambience>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/mda/Bandisto>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/BeatBox>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/mda/Combo>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
@@ -131,19 +137,43 @@
 <http://moddevices.com/plugins/mda/DeEss>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/mda/Degrade>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/mda/Delay>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/mda/Detune>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/mda/Dither>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/DubDelay>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/Dynamics>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/mda/EPiano>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/Image>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/mda/JX10>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/mda/Leslie>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/mda/Limiter>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/Loudness>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/MultiBand>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/mda/Overdrive>
@@ -167,6 +197,9 @@
 <http://moddevices.com/plugins/mda/Shepard>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/mda/Splitter>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/mda/Stereo>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
@@ -176,10 +209,16 @@
 <http://moddevices.com/plugins/mda/TalkBox>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
+<http://moddevices.com/plugins/mda/TestTone>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
 <http://moddevices.com/plugins/mda/ThruZero>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/mda/Tracker>
+    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+
+<http://moddevices.com/plugins/mda/Transient>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/mda/VocInput>
