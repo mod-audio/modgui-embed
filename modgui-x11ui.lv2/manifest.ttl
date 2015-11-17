@@ -54,11 +54,11 @@
 <http://moddevices.com/plugins/caps/Eq10X2>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://moddevices.com/plugins/caps/Eq4p>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+# <http://moddevices.com/plugins/caps/Eq4p>
+#     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
-<http://moddevices.com/plugins/caps/EqFA4p>
-    ui:ui <http://moddevices.com/ns/modgui#X11UI> .
+# <http://moddevices.com/plugins/caps/EqFA4p>
+#     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
 
 <http://moddevices.com/plugins/caps/Fractal>
     ui:ui <http://moddevices.com/ns/modgui#X11UI> .
